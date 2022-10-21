@@ -12,8 +12,19 @@
     <?php
         include 'functions.php';
         include 'connection.php';
-
+        
+        
+        if(isset($_POST['Nr'])){
+            delete_a_reinderer($pdo);
+        }
         getReindeers($pdo);
+
+
+        
+
+    
     ?>
+
+    <a href="./index.php">Home</a>
 </body>
 </html>

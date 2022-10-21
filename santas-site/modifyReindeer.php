@@ -12,6 +12,8 @@
         include 'functions.php';
 
         getReindeers($pdo);
+
+        
     ?>
     
 </body>

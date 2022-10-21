@@ -28,11 +28,22 @@ function getReindeers($pdo)
         echo "<td>" . $row['ClanName'] . "</td>";
         echo "<td>" . $row['Subspecies'] . "</td>";
         echo "<td>" . $row['ReindeerName'] . "</td>";
-        echo "<td>" . "<form method='post' action='mainsystem.php'>" . "<input type='hidden' name='Nr' value='" . $row['Nr'] . "'/>" . "<input type='submit' class='button' value='X' id='Nr' title='Delete entry'/>" . "</td>";
+        echo "<td>" . "<form method='post' action='reindeerpage.php'>" . "<input type='hidden' name='Nr' value='" . $row['Nr'] . "'/>" . "<input type='submit' class='button' value='X' id='Nr' title='Delete entry'/>" . "</td>";
         echo "</tr>";
     }
     echo "</table>";
 }
+
+function delete_a_reinderer($pdo){
+    $querystring = 'DELETE FROM Reindeer WHERE Nr = :nr;';
+
+    $stmt = $pdo->prepare($querystring);
+    $stmt->bindparam(':nr', $_POST['Nr']);
+    $stmt->execute();
+
+}
+
+
 
 function dropDownFilter($pdo)
 {
@@ -57,7 +68,7 @@ function dropDownFilter($pdo)
     echo "</br>";
 
 
-    //echo "<form class='searchbox' method='post' action='mainsystem.php'>";
+    echo "<form class='searchbox' method='post' action='dropdown.php'>";
     echo "Filter";
     echo "</br>";
     echo "<input type='text' name='filter' value='" . $filterstr . "'>";
@@ -281,7 +292,7 @@ function add_a_reindeer($pdo)
     if (isset($_POST['Nr'])) {
 
         $querystring = 'INSERT INTO Reindeer(Nr, ClanName, Subspecies, ReindeerName, Stink, Region, GroupBellonging) 
-        VALUES(:Nr, :ClanName, :Subspecies, :ReindeerName, :Stink, :Region, :GroupBellonging)';
+                                    VALUES(:Nr, :ClanName, :Subspecies, :ReindeerName, :Stink, :Region, :GroupBellonging)';
 
         $stmt = $pdo->prepare($querystring);
 
@@ -322,18 +333,18 @@ function add_a_reindeer($pdo)
        
     }*/
 
-/* function modifierPage($pdo){
+function modifyReindeer($pdo){
 
         $message = $_POST["message"];
 
-        echo "<form method='post' action='modifyReindeer.php'>";
+        $querystring = 'UPDATE Reindeer SET ReindeerName = :ReindeerName WHERE Nr = :nr';
+        $stmt = $pdo->prepare($querystring);
+        $stmt->bindparam(":nr", $_POST['Nr']);
+        $stmt->bindparam(":ReindeerName", $_POST['ReindeerName']);
 
-        echo " <input type='submit' value='Modify Reindeers' action='modifiyReindeer.php'/>";
-
-        echo "</form>"; 
+        $stmt->execute();
 
     }
-*/
 
 function toggleAddReindeer($pdo)
 {

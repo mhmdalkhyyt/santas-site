@@ -27,7 +27,7 @@
                 <input class="table-data" style="margin-bottom: 10px" type="text" id="Subspecies" name="Subspecies" value=""><br>
 
                 <label class="simple-text">Name:</label><br>
-                <input class="table-data" style="margin-bottom: 10px" type="text" id="Name" name="Name" value=""><br>
+                <input class="table-data" style="margin-bottom: 10px" type="text" id="Name" name="ReindeerName" value=""><br>
 
                 <label class="simple-text">Stink:</label><br>
                 <input class="table-data" style="margin-bottom: 10px" type="text" id="Stink" name="Stink" value=""><br>
@@ -44,10 +44,10 @@
 
             <?php
             include 'functions.php';
-
-            $pdo = new PDO('mysql:dbname=a20muhal;host=localhost;port=3307', 'root', '');
-
-                echo "Reindeer added to database";
+            include 'connection.php';
+            
+                add_a_reindeer($pdo);
+                
             ?>
 
 
