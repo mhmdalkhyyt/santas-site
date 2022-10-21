@@ -1,0 +1,137 @@
+:root {
+    /* root colors */
+    --root-primary: #344955;
+    --root-secondary: #232F34;
+    --root-third: #4A6572;
+
+    /*  text decoration */
+    --text-primary: #a66d0a;
+    --text-secondary: #f6aa33;
+    --text-third: #fab43c;
+
+    /* button decorations */
+    --btn-primary: #7d2b02;
+    --btn--secondary: #a83902;
+    --btn-third: #fa5300;
+
+}
+
+
+
+
+body {
+    background-color: var(--root-secondary);
+    outline: dashed 1px var(--text-third);
+    /* Center child horizontally*/
+    display: absolute;
+    justify-content: center;
+    height: 100%;
+    font-family: 'Raleway', sans-serif;
+    padding-left: 10px;
+
+    
+    background-attachment: fixed;
+
+}
+
+h1, h2,h3{
+    
+    text-align: center;
+    color: var(--text-third);
+    font-size: 72px;
+    background: -webkit-linear-gradient(var(--root-secondary), var(--btn-third));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+table,
+th,
+td {
+    border: 1px solid var(--root-secondary);
+    justify-content: center;
+    position: relative;
+    border-radius: 10px;
+
+
+}
+
+
+
+.searchbox {
+    color: black;
+    ;
+    border: solid black 1px;
+    margin: 0px;
+    padding: 5px;
+    display: inline-block;
+
+
+}
+
+.main-container {
+    
+    font-size: 24px;
+    margin-left: 1px;
+    width: 15%;
+    outline: solid 1px var(--root-third);
+    /* Center child horizontally*/
+    display: flex;
+    
+    background-color: var(--root-third);
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+
+.table-head {
+    margin: 10px;
+    padding: 20px;
+
+    color: var(--root-secondary);
+    font-weight: 900;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: var(--btn-third);
+    text-align: center;
+
+}
+
+.table-data {
+    color: var(--text-third);
+    padding: 5px;
+    background-color: var(--root-third);
+    
+
+}
+
+.button {
+    transition-duration: 0.8s;
+    margin-bottom: 5px;
+    padding: 7px;
+    border-radius: 12px;
+    box-shadow: 0px 8px 25px var(--root-secondary);
+    transition: all 0.5s ease 0s;
+    cursor: pointer;
+    outline: none;
+    display:inline-block;
+    font-weight: 900;
+    
+    background-color: var(--btn-third);
+    color: var(--root-secondary);
+    
+}
+
+.button:hover {
+    background-color: var(--btn-primary);
+    color: white;
+    
+    text-decoration: none;
+}
+
+.nav-btn-text {
+    color:#464247;
+}
+
+.simple-text{
+    color: var(--text-third);
+}
