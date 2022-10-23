@@ -25,12 +25,18 @@
                         <button type="submit" value="Access Reindeers" class=button><a href="./reindeerpage.php" class="nav-btn-text">Access Reindeers</a>
                     </div>
                     <div>
-                        <button type="submit" value="Access Reindeers" class=button><a href="./addReindeer.php" class="nav-btn-text">Add Reindeers</a>
+                        <button type="submit" value="Access Reindeers" class=button><a href="./showsalaries.php" class="nav-btn-text">Show salaries</a>
                     </div>
 
                     <div>
-                        <button type="submit" value="Access Reindeers" class=button><a href="./reindeerpage.php" class="nav-btn-text">Access Reindeers</a>
+                        <button type="submit" value="Access Reindeers" class=button><a href="./addReindeer.php" class="nav-btn-text">Add Reindeers</a>
                     </div>
+
+                    
+                    <div>
+                        <button type="submit" value="Access Reindeers" class=button><a href="./filter.php" class="nav-btn-text">Filter Reindeers</a>
+                    </div>
+                    
                     <div>
                         <button type="submit" class="button" value=""><a href="./signin.php">Sign out</a>
                     </div>

@@ -59,9 +59,9 @@ CREATE TABLE RetiredReindeer(
 
 
 CREATE TABLE GroupOfReindeers(
+    GroupNr int not NULL,
     ReindeerNr int not null,
     ReindeerName varchar(255) not null,
-    GroupNr int not NULL,
     Capacity int,
     Quantity int not null,
     Share float,

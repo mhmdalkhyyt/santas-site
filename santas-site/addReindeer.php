@@ -45,10 +45,12 @@
             <?php
             include 'functions.php';
             include 'connection.php';
-            
-                add_a_reindeer($pdo);
-                
+
+            add_a_reindeer($pdo);
+
             ?>
+
+            <a href="./index.php">Home</a>
 
 
         </div>

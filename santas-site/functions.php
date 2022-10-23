@@ -34,13 +34,73 @@ function getReindeers($pdo)
     echo "</table>";
 }
 
-function delete_a_reinderer($pdo){
+function getMatches($pdo)
+{
+    echo "<table style='border: 1px solid'>";
+
+
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $querystring = 'SELECT * FROM Reindeer WHERE Nr=:nr';
+    $stmt = $pdo->prepare($querystring);
+    $stmt->bindparam(':nr', $_POST['Reindeer']);
+    $stmt->execute();
+
+    $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    echo "<h2>Reindeers info</h2>";
+    echo "<tr class='table-head'>";
+    echo    "<td>Reindeer Number</td>";
+    echo    "<td>Reindeer Clan</td>";
+    echo    "<td>Subspecies</td>";
+    echo    "<td>Reindeer Name</td>";
+    echo "</tr>";
+
+    foreach ($stmt as $key => $row) {
+        echo "<tr class='table-data'>";
+
+        echo "<td>" . $row['Nr'] . "</td>";
+        echo "<td>" . $row['ClanName'] . "</td>";
+        echo "<td>" . $row['Subspecies'] . "</td>";
+        echo "<td>" . $row['ReindeerName'] . "</td>";
+        echo "</tr>";
+    }
+    echo "</table>";
+}
+
+function showSalaries($pdo)
+{
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $querystring = 'call ListOfSalary()';
+    $stmt = $pdo->prepare($querystring);
+    $stmt->execute();
+    echo "<table style='border: 1px solid'>";
+
+    echo "<h2>Reindeers salary info</h2>";
+    echo "<tr class='table-head'>";
+    echo    "<td>Reindeer Number</td>";
+    echo    "<td>Reindeer Name</td>";
+    echo    "<td>Salary</td>";
+    echo "</tr>";
+
+    foreach ($stmt as $key => $row) {
+        echo "<tr class='table-data'>";
+
+        echo "<td>" . $row['Nr'] . "</td>";
+        echo "<td>" . $row['Name'] . "</td>";
+        echo "<td>" . $row['Salary'] . "</td>";
+        echo "</tr>";
+    }
+    echo "</table>";
+}
+
+function delete_a_reinderer($pdo)
+{
     $querystring = 'DELETE FROM Reindeer WHERE Nr = :nr;';
 
     $stmt = $pdo->prepare($querystring);
     $stmt->bindparam(':nr', $_POST['Nr']);
     $stmt->execute();
-
 }
 
 
@@ -68,8 +128,8 @@ function dropDownFilter($pdo)
     echo "</br>";
 
 
-    echo "<form class='searchbox' method='post' action='dropdown.php'>";
-    echo "Filter";
+    echo "<form class='searchbox' method='post' action='filter.php'>";
+    echo "Filter:";
     echo "</br>";
     echo "<input type='text' name='filter' value='" . $filterstr . "'>";
     echo "</form>";
@@ -77,27 +137,33 @@ function dropDownFilter($pdo)
 
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $query = 'SELECT ReindeerName FROM Reindeer';
 
-    $stmt = $pdo->prepare($query);
-    $stmt->execute();
+    if (isset($_POST['filter'])) {
+        $regexfilter = $_POST['filter'];
 
-    echo "<form method='post' action='reindeerpage.php'>";
+        $query = "SELECT Nr, ReindeerName FROM Reindeer WHERE ReindeerName REGEXP :str";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindparam(':str', $regexfilter);
+        $stmt->execute();
+    
+    echo "<form method='post' action='filter.php'>";
 
-    echo "<select name='Reindeer' value='reindeerName' style='margin: 10px; margin-bottom: 10px;'>Reindeers</option>";
+    echo "<select name='Reindeer' value='reindeerName' style='margin-top: 10px; margin-bottom: 10px;'>Reindeers</option>";
 
     echo "<option value'' disabled select>Reindeers matching search</option>";
     foreach ($stmt as $row) {
 
         if (str_contains($row['ReindeerName'], $filterstr)) {
 
-            echo "<option>" . $row['ReindeerName']  . "</option>";
+            echo "<option value='" . $row['Nr'] . "' >" . $row['ReindeerName']  . "</option>";
         }
     }
 
     echo "</select>";
+    echo "</br>";
     echo "<input type='submit' value='Get Reindeer' />";
     echo "</form>";
+}
 }
 
 function dropDownShowTables($pdo)
@@ -171,7 +237,7 @@ function displayReindeerGroups($pdo)
 
     $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
     echo "<h3>Reindeers info</h3>";
-    echo "<tr class='table-reindeer'>";
+    echo "<tr class='table-head'>";
     echo    "<td>Reindeer Number</td>";
     echo    "<td>Reindeer Name</td>";
     echo    "<td>Group Number</td>";
@@ -180,7 +246,7 @@ function displayReindeerGroups($pdo)
     echo "</tr>";
 
     foreach ($stmt as $key => $row) {
-        echo "<tr class='displayReindeerGroups'>";
+        echo "<tr class='table-data'>";
 
         echo "<td>" . $row['ReindeerNr'] . "</td>";
         echo "<td>" . $row['ReindeerName'] . "</td>";
@@ -333,18 +399,18 @@ function add_a_reindeer($pdo)
        
     }*/
 
-function modifyReindeer($pdo){
+function modifyReindeer($pdo)
+{
 
-        $message = $_POST["message"];
+    $message = $_POST["message"];
 
-        $querystring = 'UPDATE Reindeer SET ReindeerName = :ReindeerName WHERE Nr = :nr';
-        $stmt = $pdo->prepare($querystring);
-        $stmt->bindparam(":nr", $_POST['Nr']);
-        $stmt->bindparam(":ReindeerName", $_POST['ReindeerName']);
+    $querystring = 'UPDATE Reindeer SET ReindeerName = :ReindeerName WHERE Nr = :nr';
+    $stmt = $pdo->prepare($querystring);
+    $stmt->bindparam(":nr", $_POST['Nr']);
+    $stmt->bindparam(":ReindeerName", $_POST['ReindeerName']);
 
-        $stmt->execute();
-
-    }
+    $stmt->execute();
+}
 
 function toggleAddReindeer($pdo)
 {

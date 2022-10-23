@@ -13,7 +13,7 @@
   1. [x]Search, that brings search-data from textbox or dropdown. 
   2. [x]Minimum a code generated form.
   3. [x]A listbox that are generated from db.
-  4. Links for e.g. update a specific row.
+  4. [x]Links for e.g. update a specific row.
 
 ### VG - Requires:
   1. Minimum 2 more forms that are generated from db and uses hidden fields to directly manipulate contents from a the table.
